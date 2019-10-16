@@ -1,19 +1,19 @@
-# The Facade class provides a simple interface to the complex logic of one or
-# several subsystems. The Facade delegates the client requests to the
-# appropriate objects within the subsystem. The Facade is also responsible for
-# managing their lifecycle. All of this shields the client from the undesired
-# complexity of the subsystem.
+# A classe Facade fornece uma interface simples para a lógica complexa de um ou
+# muitos subsistemas. O Facade delega os pedidos do cliente aos
+# objetos aprpriados dentro do subsitema. O Facade é também responsável por 
+# gerenciar o ciclo de vida. Tudo isso protege o cliente das indesejadas
+# complexidades do subsistema.
 class Facade
-  # Depending on your application's needs, you can provide the Facade with
-  # existing subsystem objects or force the Facade to create them on its own.
+  # Dependendo das necessidades da sua aplicação, você pode fornecer o Facade com
+  # objetos existentes do subsistema ou forçar o facade a criá-los por conta própria.
   def initialize(subsystem1, subsystem2)
     @subsystem1 = subsystem1 || Subsystem1.new
     @subsystem2 = subsystem2 || Subsystem2.new
   end
 
-  # The Facade's methods are convenient shortcuts to the sophisticated
-  # functionality of the subsystems. However, clients get only to a fraction of
-  # a subsystem's capabilities.
+  # Os métodos do Facade são atalhos convenientes para as sofisticadas
+  # funcionalidades dos subsitemas. No entanto, os clientes recebem apenas uma fração do
+  # dos recursos de um subsistema.
   def operation
     results = []
     results.append('Facade initializes subsystems:')
@@ -26,9 +26,9 @@ class Facade
   end
 end
 
-# The Subsystem can accept requests either from the facade or client directly.
-# In any case, to the Subsystem, the Facade is yet another client, and it's not
-# a part of the Subsystem.
+# O subsistema pode aceitar solicitações diretamente do facade ou do cliente.
+# De qualquer forma, para o subsistema o Facade é outro cliente, e não é
+# uma parte do subsistema.
 class Subsystem1
   # @return [String]
   def operation1
@@ -43,7 +43,7 @@ class Subsystem1
   end
 end
 
-# Some facades can work with multiple subsystems at the same time.
+# alguns facades podem trabalhar com muitos subsistemas ao mesmo tempo.
 class Subsystem2
   # @return [String]
   def operation1
@@ -58,17 +58,17 @@ class Subsystem2
   end
 end
 
-# The client code works with complex subsystems through a simple interface
-# provided by the Facade. When a facade manages the lifecycle of the subsystem,
-# the client might not even know about the existence of the subsystem. This
-# approach lets you keep the complexity under control.
+# O código do cliente tabalha com subsistemas complexos através de uma interface simples
+# providenciada pelo Facade. Quando um facade gerencia o ciclo de vida do subsistema,
+# o cliente pode nem saber sobre a existência do subsistema. Isso
+# essa abordagem permite manter a complexidade sob controle.
 def client_code(facade)
   print facade.operation
 end
 
-# The client code may have some of the subsystem's objects already created. In
-# this case, it might be worthwhile to initialize the Facade with these objects
-# instead of letting the Facade create new instances.
+# O código do cliente pode ter algum dos objetos do subsistema já criados. Neste caso,
+# pode valer a pena inicializar o Facade com esses objetos
+# ao invés de deixar o Facade criar novas instâncias.
 subsystem1 = Subsystem1.new
 subsystem2 = Subsystem2.new
 facade = Facade.new(subsystem1, subsystem2)
